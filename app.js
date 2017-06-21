@@ -12,27 +12,31 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-app.get(':operator:first:second', function(req, res) {
+app.get('/:operator/:first/:second', function(req, res) {
     var result;
-    var math = function(operator, first, second){
-        if (req.params.operator === "add"){
-            result = parseInt(req.params.first) + parseInt(req.params.second);
-            res.send(result);
-        }
-        else if (req.params.operator === "subtract"){
-            result = parseInt(req.params.first) - parseInt(req.params.second);
-            res.send(result);
-        }
-        else if (req.params.operator === "multiply"){
-            result = req.params.first * req.params.second;
-            res.send(result);
-        }
-        else if (req.params.operator === "divide"){
-            result = req.params.first / req.params.second;
-            res.send(result);
-        }
+    var operator = req.params.operator;
+    var first = parseInt(req.params.first);
+    var second = parseInt(req.params.second);
+
+    if (operator === "add"){
+        result = first + second;
+        res.send(result.toString());
     }
-    console.log(req.params.operator);
+    else if (operator === "subtract"){
+        result = first - second;
+        res.send(result.toString());
+    }
+    else if (operator === "multiply"){
+        result = first * second;
+        res.send(result.toString());
+    }
+    else if (operator === "divide"){
+        result = first / second;
+        res.send(result.toString());
+    }
+    else {
+        res.send("try again, foo");
+    }
 });
 
 
